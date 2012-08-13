@@ -8,28 +8,26 @@ Activate the module by adding it to your <code>application/bootstrap.php</code> 
 
 To use it, add it to a form in your views with:
 
-<pre><code><?php echo Honeypot::make() ?></code></pre>
+	echo Honeypot::make()
 
 Then in your controller you can use this with the Validation library, or as a standalone.
 
-<pre><code><?php
-// Stand alone without CSRF check
-if ( ! Honeypot::check())
-{
-	// not valid
-}
+	// Stand alone without CSRF check
+	if ( ! Honeypot::check())
+	{
+		// not valid
+	}
 
-// Stand alone with CSRF check
-if ( ! Honeypot::check(true))
-{
-	// not valid
-}
+	// Stand alone with CSRF check
+	if ( ! Honeypot::check(true))
+	{
+		// not valid
+	}
 
-// Validation
-$post = Validation($_POST)
-		->rule(Honeypot::FIELD_NAME, 'Honeypot::check') // without CSRF check
-		->rule(Honeypot::FIELD_NAME, 'Honeypot::check', array('true')); //  with CSRF check
+	// Validation
+	$post = Validation($_POST)
+			 ->rule(Honeypot::FIELD_NAME, 'Honeypot::check') // without CSRF check
+			->rule(Honeypot::FIELD_NAME, 'Honeypot::check', array('true')); //  with CSRF check
 
-?></code></pre>
 
 Notice an error, please use the issue tracker, or fork, fix and submit a pull request. 
