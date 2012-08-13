@@ -1,7 +1,7 @@
 ##Honeypot Security Module For Kohana Framework
 
 ###Introduction
-This is a Security Module for the (http://kohanaframework.org)[Kohana Framework]. Its a good replacement for Captcha.
+This is a Security Module for the [Kohana Framework](http://kohanaframework.org). Its a good replacement for Captcha.
 To install this module, download the zip, and then unzip into the Kohana modules directory.
 
 Activate the module by adding it to your <code>application/bootstrap.php</code> file.
