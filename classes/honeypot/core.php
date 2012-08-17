@@ -17,14 +17,14 @@ class Honeypot_Core {
 	 *
 	 * @var  string
 	 */
-	protected const KEY = 'kohana_honeypot_key';
+	const KEY = 'kohana_honeypot_key';
 
 	/**
 	 * The name of the hidden form field that should remain empty.
 	 *
 	 * @var  string
 	 */
-	protected const FIELD_NAME = '.full_name.';
+	const FIELD_NAME = '_full_name_';
 
 	/**
 	 * The name of the token field. this can protect against CSRF
@@ -32,15 +32,15 @@ class Honeypot_Core {
 	 *
 	 * @var  int
 	 */
-	protected const TOKEN_FIELD_NAME = '_form_token';
+	const TOKEN_FIELD_NAME = '_form_token';
 
 	/**
 	 * The time it should take before the form is seen as filled
-	 * by a human. Time in minutes.
+	 * by a human. Time in seconds.
 	 *
 	 * @var  int
 	 */
-	protected static $timeout = 1;
+	protected static $timeout = 20;
 
 
 	/**
@@ -67,7 +67,7 @@ class Honeypot_Core {
 			// Honeypot data
 			$honeypot_data = array(
 				'key'		=> md5(uniqid(rand(), TRUE)),
-				'created'	=> time() + (Honeypot::$timeout * 60),
+				'validity'	=> time() + (Honeypot::$timeout),
 			);
 		}
 
@@ -101,7 +101,7 @@ class Honeypot_Core {
 
 		// If one or none of the expected honeypot data is set then theres no need
 		// to go further, its an invalid request. Abort!
-		if ( ! isset($honeypot_data['key']) OR ! isset($honeypot_data['created']))
+		if ( ! isset($honeypot_data['key']) OR ! isset($honeypot_data['validity']))
 			return FALSE;
 
 		// This field is invisible to users and thus should NOT ever be filled
@@ -111,7 +111,7 @@ class Honeypot_Core {
 
 		// The token has not expired, this form was filled waay too fast.
 		// An over-enthusiastic bot.
-		if (time() < $honeypot_data['created'])
+		if (time() < $honeypot_data['validity'])
 			return FALSE;
 
 		// Validate CSRF token. Killing two birds with one stone.
