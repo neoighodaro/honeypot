@@ -8,6 +8,7 @@
  *
  * @author  Neo Ighodaro <jeeniors@gmail.com>
  * @package Honeypot
+ * @version 2.0
  */
 class Honeypot
 {
