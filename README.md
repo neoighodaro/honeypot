@@ -1,4 +1,8 @@
-##Honeypot Security Module For Kohana Framework
+##Honeypot v2 Security Module For Kohana Framework
+
+####Changes from 1.0 to 2.0
+ [*] Restructured the whole Honeypot class and added support for drivers.
+ [*] Force CSRF check as part of the Honeypot module.
 
 ###Introduction
 This is a Security Module for the [Kohana Framework](http://kohanaframework.org). Its a good replacement for Captcha.
@@ -18,16 +22,4 @@ Then in your controller you can use this with the Validation library, or as a st
 		// not valid
 	}
 
-	// Stand alone with CSRF check
-	if ( ! Honeypot::check(true))
-	{
-		// not valid
-	}
-
-	// Validation
-	$post = Validation($_POST)
-			 ->rule(Honeypot::FIELD_NAME, 'Honeypot::check') // without CSRF check
-			->rule(Honeypot::FIELD_NAME, 'Honeypot::check', array('true')); //  with CSRF check
-
-
-Notice an error, please use the issue tracker, or fork, fix and submit a pull request. 
+Notice an error, please use the issue tracker, or fork, fix and submit a pull request.
